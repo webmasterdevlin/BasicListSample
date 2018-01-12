@@ -16,7 +16,7 @@ namespace BasicListSample
 
         private static IEnumerable<Person> GetList(string searchText = null)
         {
-            var contacts = new List<Person>()
+            var contacts = new List<Person>
             {
                 new Person{Name = "Donald", Detail = "Online", Image = "https://placeimg.com/100/100/people/2"},
                 new Person{Name = "Devlin", Detail = "Online", Image = "https://placeimg.com/100/100/people/3"},
@@ -29,22 +29,17 @@ namespace BasicListSample
                 new Person{Name = "Rhea", Detail = "Online", Image = "https://placeimg.com/100/100/people/5"},
             };
 
-            return string.IsNullOrEmpty(searchText) ? contacts : contacts.Where(c => c.Name.StartsWith(searchText));
+            return string.IsNullOrEmpty(searchText) ? contacts : contacts.Where(c => c.Name.ToLower().StartsWith(searchText.ToLower()));
         }
 
         private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item is Person contact) DisplayAlert("Tapped", contact.Name, "Ok", "Cancel");
-
-            //            var contact = e.Item as Person;
-            //            DisplayAlert("Tapped", contact.Name, "Ok", "Cancel");
         }
 
         private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             MyListView.SelectedItem = null;
-            //            var contact = e.SelectedItem as Person;
-            //            DisplayAlert("Selected", contact.Name, "Ok");
         }
 
         private void ListView_OnRefreshing(object sender, EventArgs e)
